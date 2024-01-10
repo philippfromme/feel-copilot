@@ -1,8 +1,6 @@
-# BPMN AI Refactorings
+# FEEL Copilot 👨‍✈️
 
-This is a prototype for a BPMN editor that uses AI to suggest [refactorings](src/features/handlers/).
-
-![Example](docs/example.gif)
+This is a prototype for a FEEL copilot.
 
 ## Setup
 

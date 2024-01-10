@@ -1,0 +1,75 @@
+@use "@carbon/react";
+@use "@carbon/react/scss/themes";
+@use "@carbon/react/scss/theme";
+
+:root {
+	@include theme.theme(themes.$g10);
+}
+
+@import '@carbon/colors';
+@import '@carbon/styles/scss/utilities/box-shadow';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  background-color: $white;
+}
+
+body {
+  display: flex;
+}
+
+.bjs-powered-by {
+  display: none;
+}
+
+#container {
+  flex-grow: 1;
+}
+
+#properties {
+  background: #f8f8f8;
+  border-left: solid 1px #ccc;
+  width: 350px;
+}
+
+.bio-properties-panel-feel-popup {
+  position: absolute;
+  top: unset !important;
+  right: unset !important;
+  bottom: unset !important;
+  left: unset !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.bio-properties-panel-popup .bio-properties-panel-popup__header {
+  justify-content: flex-start !important;
+}
+
+.bio-properties-panel-popup .bio-properties-panel-popup__header.draggable {
+  cursor: default !important;
+}
+
+.bio-properties-panel-popup .bio-properties-panel-popup__drag-handle {
+  display: none !important;
+}
+
+.bio-properties-panel-feel-popup__title-link {
+  display: none !important;
+}
+
+.bio-properties-panel-popup .bio-properties-panel-popup__footer {
+  top: 0;
+  bottom: unset !important;
+  padding: 7px 0px;
+}
