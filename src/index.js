@@ -8,9 +8,7 @@ import {
 
 import zeebeModdlePackage from 'zeebe-bpmn-moddle/resources/zeebe';
 
-import FeaturesModule from './features';
-
-import { inlineSuggestion } from './inlineSuggestion';
+import { inlineSuggestion } from 'codemirror-extension-inline-suggestion';
 
 import { EditorView } from '@codemirror/view';
 
@@ -25,8 +23,6 @@ import './styles.scss';
 
 import diagram from './diagram.bpmn';
 
-import systemPrompt from './system-prompt.txt';
-
 const container = document.getElementById('container');
 
 const openAIApiKey = process.env.OPENAI_API_KEY;
@@ -36,7 +32,9 @@ const openai = new OpenAI({
   dangerouslyAllowBrowser: true
 });
 
-async function getSuggestion(state) {
+async function fetchFn(state) {
+  return 'foobar';
+
   const { text } = state.doc;
 
   const partialFEELExpression = text[ 0 ];
@@ -61,7 +59,7 @@ ${partialFEELExpression}
 `
       }
     ],
-    model: 'gpt-4-1106-preview'
+    model: 'gpt-4o'
   });
 
   console.log('[OPENAI] response:', chatCompletion);
@@ -75,6 +73,8 @@ ${partialFEELExpression}
   const { message } = choices[ 0 ];
 
   const { content } = message;
+
+  console.log('raw content', content);
 
   const suggestion = content.slice(partialFEELExpression.length);
 
@@ -90,7 +90,8 @@ const modeler = new Modeler({
     feelPopupContainer: '.bio-properties-panel',
     feelEditorExtensions: [
       inlineSuggestion({
-        getSuggestion
+        fetchFn,
+        delay: 1000
       }),
       EditorView.updateListener.of((view) => {
         if (view.docChanged) {
@@ -101,7 +102,6 @@ const modeler = new Modeler({
     ]
   },
   additionalModules: [
-    FeaturesModule,
     BpmnPropertiesPanelModule,
     BpmnPropertiesProviderModule,
     ZeebePropertiesProviderModule
