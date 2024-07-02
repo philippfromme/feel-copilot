@@ -1,75 +1,58 @@
 @use "@carbon/react";
-@use "@carbon/react/scss/themes";
-@use "@carbon/react/scss/theme";
 
-:root {
-	@include theme.theme(themes.$g10);
+#app {
+  margin: 48px auto;
+  padding: 24px;
+  max-width: 1000px;
 }
 
-@import '@carbon/colors';
-@import '@carbon/styles/scss/utilities/box-shadow';
-
-* {
-  box-sizing: border-box;
+.cds--header__name {
+  pointer-events: none;
+  cursor: default;
 }
 
-html,
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  background-color: $white;
+.generate-button {
+  width: 100%;
+
+  .cds--inline-loading {
+    margin-top: 2px;
+    min-block-size: 0 !important;
+  }
 }
 
-body {
-  display: flex;
+.code-editor {
+  .code-editor__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .code-editor__error {
+    background-color: var(--cds-button-danger-primary, #da1e28);
+    color: var(--cds-text-on-color, #ffffff);
+    min-block-size: 0;
+  }
 }
 
-.bjs-powered-by {
-  display: none;
+.cm-editor {
+  padding: 12px !important;
+  background-color: var(--cds-field) !important;
+
+  &.cm-focused {
+    outline: 2px solid var(--cds-focus, #0f62fe) !important;
+  }
+
+  .cm-activeLine,
+  .cm-activeLineGutter {
+    background-color: var(--cds-layer-accent) !important;
+  }
 }
 
-#container {
-  flex-grow: 1;
-}
+.notifications {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
 
-#properties {
-  background: #f8f8f8;
-  border-left: solid 1px #ccc;
-  width: 350px;
-}
-
-.bio-properties-panel-feel-popup {
-  position: absolute;
-  top: unset !important;
-  right: unset !important;
-  bottom: unset !important;
-  left: unset !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.bio-properties-panel-popup .bio-properties-panel-popup__header {
-  justify-content: flex-start !important;
-}
-
-.bio-properties-panel-popup .bio-properties-panel-popup__header.draggable {
-  cursor: default !important;
-}
-
-.bio-properties-panel-popup .bio-properties-panel-popup__drag-handle {
-  display: none !important;
-}
-
-.bio-properties-panel-feel-popup__title-link {
-  display: none !important;
-}
-
-.bio-properties-panel-popup .bio-properties-panel-popup__footer {
-  top: 0;
-  bottom: unset !important;
-  padding: 7px 0px;
+  .cds--toast-notification:not(:last-child) {
+    margin-bottom: 4px;
+  }
 }
