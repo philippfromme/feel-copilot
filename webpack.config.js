@@ -15,7 +15,14 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: [ 'babel-loader' ],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: [
+              [ '@babel/plugin-transform-react-jsx' ]
+            ]
+          }
+        }
       },
       {
         test: /\.css$/i,
@@ -24,27 +31,16 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [ 'style-loader', 'css-loader', 'sass-loader' ],
-      },
-      {
-        test: /\.(bpmn|txt)$/i,
-        use: [ 'raw-loader' ],
-      },
+      }
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
-    new Dotenv(),
+    new Dotenv({
+      systemvars: process.env.NODE_ENV === 'production'
+    })
   ],
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
-    compress: true,
-    port: 9000,
-  },
-  experiments: {
-    asyncWebAssembly: true,
-  },
+  devtool: 'source-map',
 };
